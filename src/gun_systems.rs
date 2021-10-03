@@ -1,5 +1,7 @@
 use bevy::{core::Time, math::Vec3, prelude::{IntoSystem, Plugin, Query, Res}};
 
+use crate::util::Speed;
+
 /** First is current cooldown, second is reset cooldown */
 pub struct GunCooldown(pub f32, pub f32);
 impl Default for GunCooldown {
@@ -12,13 +14,15 @@ pub struct Gun {
     pub damage: f32,
     pub cooldown: GunCooldown,
     pub offset: Vec3,
+    pub initial_speed: Speed,
 }
 impl Default for Gun {
     fn default() -> Self {
         Self {
             damage: 1.,
             cooldown: GunCooldown::default(),
-            offset: Vec3::ZERO
+            offset: Vec3::ZERO,
+            initial_speed: Speed(0., 500.)
         }
     }
 }
